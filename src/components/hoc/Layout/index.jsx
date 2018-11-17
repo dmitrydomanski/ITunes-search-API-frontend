@@ -9,6 +9,7 @@ import Loader from '../../UI/Loader';
 import Header from '../../UI/Header';
 import Section from '../../UI/Section';
 import Informer from '../../UI/Informer';
+import Button from '../../UI/Button';
 
 const url = 'http://localhost:3000/api/search?term=';
 
@@ -16,7 +17,9 @@ class Layout extends Component {
     state = {
         results: [],
         isLoaded: true,
-        searched: false,
+        dataSearched: false,
+        dataSaved: false,
+        popQueries: [],
     }
 
     getSearchItems = async (query) => {
@@ -26,16 +29,42 @@ class Layout extends Component {
                 this.setState({
                     results: response.data,
                     isLoaded: true,
-                    searched: true,
+                    dataSearched: true,
+                    popQueries: [],
                 });
-                console.log(this.state);
             });
     }
 
     saveSearchItem = async (query) => {
         const encodedValue = encodeURIComponent(query);
         await axios.post(`${url}${encodedValue}`)
-            .then(response => console.log(response));
+            .then((response) => {
+                if (response.status === 500) {
+                    this.setState({
+                        dataSaved: false,
+                    });
+                }
+                if (response.status === 201) {
+                    this.setState({
+                        dataSaved: true,
+                    });
+                }
+            });
+    }
+
+    getPopularRequests = async () => {
+        this.setState({
+            isLoaded: false,
+        });
+        await axios.get('http://localhost:3000/api/top')
+            .then((response) => {
+                this.setState({
+                    popQueries: response.data,
+                    isLoaded: true,
+                    results: [],
+                    dataSearched: false,
+                });
+            });
     }
 
     performSearch = (query) => {
@@ -47,7 +76,7 @@ class Layout extends Component {
     }
 
     render() {
-        const { isLoaded, results, searched } = this.state;
+        const { isLoaded, results, dataSearched, dataSaved, popQueries } = this.state;
         const informer = 'Sorry, there are no such videos on iTunes, try another search please';
         if (!isLoaded) {
             return (
@@ -60,9 +89,16 @@ class Layout extends Component {
             <Aux>
                 <Header title="Search and view music videos from iTunes">
                     <SearchInput onSearch={this.performSearch} />
+                    {dataSearched && !dataSaved
+                        ? <div>query not saved</div>
+                        : null}
+                    <Button
+                        clicked={this.getPopularRequests}
+                    >Get 10 most popular requests
+                    </Button>
                 </Header>
                 <Section>
-                    {searched && results.length === 0
+                    {dataSearched && results.length === 0
                         ? <Informer title={informer} />
                         : results.map((item, index) => (
                             <SearchResultItem
@@ -71,6 +107,11 @@ class Layout extends Component {
                                 picture={item.artworkUrl100}
                                 key={parseInt(index.toString(), 10)}
                             />
+                        ))}
+                    {popQueries.length === 0
+                        ? null
+                        : popQueries.map((item, index) => (
+                            <div key={parseInt(index.toString(), 10)}>{item}</div>
                         ))}
                 </Section>
             </Aux>
