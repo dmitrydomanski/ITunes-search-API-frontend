@@ -1,15 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import './Backdrop.scss';
+const Wrapper = styled.div`
+width: 100%;
+height: 100%;
+position: fixed;
+z-index: 100;
+left: 0;
+top: 0;
+background-color:ghostwhite;
+`;
 
 const backdrop = ({ show, clicked }) => (
     show
         ? (
-            <div
+            <Wrapper
                 role="link"
                 tabIndex="-1"
-                className="Backdrop"
                 onClick={clicked}
                 onKeyPress={clicked}
             />

@@ -50,7 +50,6 @@ module.exports = {
             "error",
             "unix"
         ],
-        "react/destructuring-assignment": [true, { "extensions": [".jsx"] }],
         "quotes": [
             "error",
             "single"

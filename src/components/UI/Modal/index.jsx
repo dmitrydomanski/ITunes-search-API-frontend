@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './Modal.scss';
-import Aux from '../../hoc/Aux/index';
-import Backdrop from '../Backdrop/Backdrop';
+import styled from 'styled-components';
+import Aux from '../../hoc/Aux';
+import Backdrop from '../Backdrop';
+
+const ModalWrapper = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+height: -webkit-fill-available
+position: relative;
+z-index: 500;
+transition: all 0.3s ease-out;`;
 
 export default class Modal extends Component {
     shouldComponentUpdate(nextProps) {
@@ -16,15 +25,14 @@ export default class Modal extends Component {
         return (
             <Aux>
                 <Backdrop show={show} clicked={modalClosed} />
-                <div
-                    className="Modal"
+                <ModalWrapper
                     style={{
                         transform: show ? 'translateY(0)' : 'translateY(-100vh)',
                         opacity: show ? '1' : '0',
                     }}
                 >
                     {children}
-                </div>
+                </ModalWrapper>
             </Aux>
         );
     }

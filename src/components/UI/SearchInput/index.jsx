@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+
+const Wrapper = styled.form`
+margin-top: 20px;
+`;
+
+const TextField = styled.input`
+border: solid 2px darkgray;
+font-size: 18px;
+border-radius: 5px;
+min-width: 350px;
+padding: 5px;
+`;
 
 export default class SearchInput extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     const { onSearch } = this.props;
-    // }
-
     state = {
         searchText: '',
     }
@@ -33,15 +42,17 @@ export default class SearchInput extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.onSearch(this.query.value);
+        const { onSearch } = this.props;
+        const { value } = this.query;
+        onSearch(value);
         event.target.blur();
     }
 
     render() {
         const { searchText } = this.state;
         return (
-            <form>
-                <input
+            <Wrapper>
+                <TextField
                     type="search"
                     onChange={this.onSearchChange}
                     onKeyDown={this.onKeyDown}
@@ -49,9 +60,9 @@ export default class SearchInput extends Component {
                     name="search"
                     ref={(input) => { this.query = input; }}
                     value={searchText}
-                    placeholder="Search..."
+                    placeholder="type in an artist name to search videos..."
                 />
-            </form>
+            </Wrapper>
         );
     }
 }
