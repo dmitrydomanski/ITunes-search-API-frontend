@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-
-class SearchInput extends Component {
+export default class SearchInput extends Component {
+    // constructor(props) {
+    //     super(props);
+    //     const { onSearch } = this.props;
+    // }
 
     state = {
-        searchText: ''
+        searchText: '',
     }
 
-    onSearchChange = event => {
+    onSearchChange = (event) => {
         this.setState({
-            searchText: event.target.value
+            searchText: event.target.value,
         });
     }
 
-    onKeyDown = event => {
+    onKeyDown = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             event.stopPropagation();
@@ -21,31 +25,41 @@ class SearchInput extends Component {
         }
     }
 
-    onFocus = event => {
-        this.setState({ searchText: '' });
+    onFocus = () => {
+        this.setState({
+            searchText: '',
+        });
     }
 
-    handleSubmit = event => {
+    handleSubmit = (event) => {
         event.preventDefault();
         this.props.onSearch(this.query.value);
         event.target.blur();
     }
 
     render() {
+        const { searchText } = this.state;
         return (
             <form>
-                <input type="search"
+                <input
+                    type="search"
                     onChange={this.onSearchChange}
                     onKeyDown={this.onKeyDown}
                     onFocus={this.onFocus}
                     name="search"
-                    role="textbox"
-                    ref={(input) => this.query = input}
-                    value={this.state.searchText}
-                    placeholder="Search..." />
+                    ref={(input) => { this.query = input; }}
+                    value={searchText}
+                    placeholder="Search..."
+                />
             </form>
         );
     }
 }
 
-export default SearchInput;
+SearchInput.propTypes = {
+    onSearch: PropTypes.func,
+};
+
+SearchInput.defaultProps = {
+    onSearch: null,
+};

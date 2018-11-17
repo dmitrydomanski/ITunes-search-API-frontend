@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Layout from '../hoc/Layout/index.jsx';
+import Layout from '../hoc/Layout/index';
 
 const app = () => (
     <Layout />

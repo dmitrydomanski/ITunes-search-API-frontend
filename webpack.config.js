@@ -1,7 +1,7 @@
-'use strict'
 
-const ExtractPlugin = require('extract-text-webpack-plugin')
-const HTMLPlugin = require('html-webpack-plugin')
+const ExtractPlugin = require('extract-text-webpack-plugin');
+const HTMLPlugin = require('html-webpack-plugin');
+
 module.exports = {
     devtool: 'eval',
     entry: `${__dirname}/src/main.jsx`,
@@ -11,11 +11,11 @@ module.exports = {
         publicPath: '/',
     },
     resolve: {
-        extensions: ['.js', '.jsx']
-      },
+        extensions: ['.js', '.jsx'],
+    },
     mode: 'development',
     performance: {
-        hints: false
+        hints: false,
     },
     plugins: [
         new HTMLPlugin(),
@@ -34,4 +34,4 @@ module.exports = {
             },
         ],
     },
-}
+};

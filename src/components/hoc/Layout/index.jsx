@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import Aux from '../Aux/index.jsx';
-import SearchInput from '../../UI/SearchInput/index.jsx';
-import SearchResultsList from '../../containers/SearchResultsList/index.jsx';
-import Modal from '../../UI/Modal/Modal.jsx';
-import Loader from '../../UI/Loader/Loader.jsx';
+import Aux from '../Aux/index';
+import SearchInput from '../../UI/SearchInput/index';
+import SearchResultsList from '../../containers/SearchResultsList/index';
+import Modal from '../../UI/Modal/Modal';
+import Loader from '../../UI/Loader/Loader';
 
 class Layout extends Component {
     state = {
@@ -13,20 +13,20 @@ class Layout extends Component {
     }
 
     performSearch = (query) => {
-        this.setState({isLoaded: false});
+        this.setState({
+            isLoaded: false,
+        });
         const encodedValue = encodeURIComponent(query);
         fetch(`http://localhost:3000/api/search?term=${encodedValue}`)
-          .then(response => response.json())
-          .then(responseData => {
-            this.setState({
-              results: responseData,
-              isLoaded: true,
-            });
-          })
-          .catch(error => {
-            console.log('Error fetching and parsing data', error);
-          });
-      }
+            .then(response => response.json())
+            .then((responseData) => {
+                this.setState({
+                    results: responseData,
+                    isLoaded: true,
+                });
+            })
+            .catch(error => console.log('Error fetching and parsing data', error));
+    }
 
     render() {
         const { isLoaded, results } = this.state;
@@ -39,10 +39,10 @@ class Layout extends Component {
         }
         return (
             <Aux>
-                <SearchInput onSearch={this.performSearch}/>
+                <SearchInput onSearch={this.performSearch} />
                 <SearchResultsList items={results} />
             </Aux>
-        )
+        );
     }
 }
 

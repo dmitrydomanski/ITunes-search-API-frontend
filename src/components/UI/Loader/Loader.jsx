@@ -3,9 +3,9 @@ import './Loader.scss';
 
 const loader = () => (
 
-        <div className="Striploader">
-            <div /><div /><div />
-        </div>
+    <div className="Striploader">
+        <div /><div /><div />
+    </div>
 );
 
 export default loader;
