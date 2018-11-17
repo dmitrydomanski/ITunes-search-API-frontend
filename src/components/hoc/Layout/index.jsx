@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Aux from '../Aux';
 import SearchInput from '../../UI/SearchInput';
@@ -9,6 +10,8 @@ import Header from '../../UI/Header';
 import Section from '../../UI/Section';
 import Informer from '../../UI/Informer';
 
+const url = 'http://localhost:3000/api/search?term=';
+
 class Layout extends Component {
     state = {
         results: [],
@@ -16,21 +19,31 @@ class Layout extends Component {
         searched: false,
     }
 
+    getSearchItems = async (query) => {
+        const encodedValue = encodeURIComponent(query);
+        await axios.get(`${url}${encodedValue}`)
+            .then((response) => {
+                this.setState({
+                    results: response.data,
+                    isLoaded: true,
+                    searched: true,
+                });
+                console.log(this.state);
+            });
+    }
+
+    saveSearchItem = async (query) => {
+        const encodedValue = encodeURIComponent(query);
+        await axios.post(`${url}${encodedValue}`)
+            .then(response => console.log(response));
+    }
+
     performSearch = (query) => {
         this.setState({
             isLoaded: false,
         });
-        const encodedValue = encodeURIComponent(query);
-        fetch(`http://localhost:3000/api/search?term=${encodedValue}`)
-            .then(response => response.json())
-            .then((responseData) => {
-                this.setState({
-                    results: responseData,
-                    isLoaded: true,
-                    searched: true,
-                });
-            })
-            .catch(error => console.log('Error fetching and parsing data', error));
+        this.getSearchItems(query);
+        this.saveSearchItem(query);
     }
 
     render() {
