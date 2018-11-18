@@ -3,8 +3,8 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Aux from '../Aux';
-import ScreenOne from '../../../containers/ScreenOne';
-import ScreenTwo from '../../../containers/ScreenTwo';
+import ResultsLists from '../../../containers/ResultsLists';
+import VideoDetails from '../../../containers/VideoDetails';
 
 const layout = () => (
     <Aux>
@@ -12,34 +12,14 @@ const layout = () => (
             <Route
                 exact
                 path="/"
-                component={ScreenOne}
+                component={ResultsLists}
             />
             <Route
-                path="/screen"
-                component={ScreenTwo}
+                path="/:videoID"
+                component={VideoDetails}
             />
-            {/* <Route
-                path="/gallery"
-                component={DisclaimerPage}
-            />
-            <Route
-                path="/documents"
-                component={DisclaimerPage}
-            /> */}
         </Switch>
     </Aux>
 );
-
-// layout.propTypes = {
-//     location: PropTypes.shape({
-//         pathname: PropTypes.string.isRequired,
-//     }),
-// };
-
-// layout.defaultProps = {
-//     location: {
-//         pathname: '',
-//     },
-// };
 
 export default withRouter(layout);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Aux from '../../components/hoc/Aux';
@@ -13,7 +14,7 @@ import Button from '../../components/UI/Button';
 
 const url = 'http://localhost:3000/api/search?term=';
 
-class Layout extends Component {
+export default class ResultsLists extends Component {
     state = {
         results: [],
         isLoaded: true,
@@ -75,6 +76,10 @@ class Layout extends Component {
         this.saveSearchItem(query);
     }
 
+    handleClick = (name, trackId) => () => {
+        console.log(name, trackId);
+    }
+
     render() {
         const { isLoaded, results, dataSearched, dataSaved, popQueries } = this.state;
         const informer = 'Sorry, there are no such videos on iTunes, try another search please';
@@ -101,12 +106,17 @@ class Layout extends Component {
                     {dataSearched && results.length === 0
                         ? <Informer title={informer} />
                         : results.map((item, index) => (
-                            <SearchResultItem
-                                artist={item.artistName}
-                                track={item.trackName}
-                                picture={item.artworkUrl100}
+                            <Link
+                                to={`term=${item.artistName}&trackId=${item.trackId}`}
                                 key={parseInt(index.toString(), 10)}
-                            />
+                            >
+                                <SearchResultItem
+                                    artist={item.artistName}
+                                    track={item.trackName}
+                                    picture={item.artworkUrl100}
+                                    clicked={this.handleClick(item.artistName, item.trackId)}
+                                />
+                            </Link>
                         ))}
                     {popQueries.length === 0
                         ? null
@@ -118,5 +128,3 @@ class Layout extends Component {
         );
     }
 }
-
-export default Layout;
