@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Aux from '../Aux';
 import ScreenOne from '../../../containers/ScreenOne';
+import ScreenTwo from '../../../containers/ScreenTwo';
 
 const layout = () => (
     <Aux>
@@ -13,11 +14,11 @@ const layout = () => (
                 path="/"
                 component={ScreenOne}
             />
-            {/* <Route
-                path="/treechart"
-                component={TreeChart}
-            />
             <Route
+                path="/screen"
+                component={ScreenTwo}
+            />
+            {/* <Route
                 path="/gallery"
                 component={DisclaimerPage}
             />

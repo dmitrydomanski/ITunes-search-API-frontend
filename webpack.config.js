@@ -21,6 +21,9 @@ module.exports = {
         new HTMLPlugin(),
         new ExtractPlugin('bundle-[hash].css'),
     ],
+    devServer: {
+        historyApiFallback: true,
+    },
     module: {
         rules: [
             {

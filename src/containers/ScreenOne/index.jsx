@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Aux from '../Aux';
-import SearchInput from '../../UI/SearchInput';
-import SearchResultItem from '../../SearchResultItem';
-import Modal from '../../UI/Modal';
-import Loader from '../../UI/Loader';
-import Header from '../../UI/Header';
-import Section from '../../UI/Section';
-import Informer from '../../UI/Informer';
-import Button from '../../UI/Button';
+import Aux from '../../components/hoc/Aux';
+import SearchResultItem from '../../components/SearchResultItem';
+import SearchInput from '../../components/UI/SearchInput';
+import Modal from '../../components/UI/Modal';
+import Loader from '../../components/UI/Loader';
+import Header from '../../components/UI/Header';
+import Section from '../../components/UI/Section';
+import Informer from '../../components/UI/Informer';
+import Button from '../../components/UI/Button';
 
 const url = 'http://localhost:3000/api/search?term=';
 
