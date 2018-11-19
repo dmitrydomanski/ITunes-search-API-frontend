@@ -108,6 +108,10 @@ export default class ResultsLists extends Component {
                         : results.map((item, index) => (
                             <Link
                                 to={`term=${item.artistName}&trackId=${item.trackId}`}
+                                // to={{
+                                //     pathname: '/',
+                                //     search: `term=${item.artistName}&trackId=${item.trackId}`,
+                                // }}
                                 key={parseInt(index.toString(), 10)}
                             >
                                 <SearchResultItem

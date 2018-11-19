@@ -14,16 +14,15 @@ export default class VideoDetails extends Component {
     }
 
     async componentDidMount() {
-        const url = 'http://localhost:3000/api/lookup?trackId=';
-        const { location } = this.props;
-        const { search } = location.search;
-        const query = new URLSearchParams(search);
-        console.log(query);
+        const getUrl = 'http://localhost:3000/api/lookup?trackId=';
+        const { match } = this.props;
+        const query = match.url.slice(1).split('&')
+            .map(element => element.slice(element.indexOf('=') + 1));
 
-        const trackID = 583288725;
-        const term = 'Metallica';
+        const trackID = query[1];
+        const term = query[0];
 
-        await axios.get(`${url}${trackID}&term=${term}`)
+        await axios.get(`${getUrl}${trackID}&term=${term}`)
             .then((response) => {
                 const track = response.data[0];
                 this.setState({
