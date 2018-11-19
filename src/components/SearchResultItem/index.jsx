@@ -33,7 +33,7 @@ const searchResultItem = ({ artist, track, picture, clicked, trackId }) => {
     return (
         <div
             style={wrapper}
-            // onClick={handleClick(artist, trackId)}
+            onClick={handleClick(artist, trackId)}
             onKeyDown={clicked}
             role="button"
             tabIndex="-1"
