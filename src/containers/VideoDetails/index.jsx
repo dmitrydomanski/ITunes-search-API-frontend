@@ -38,6 +38,7 @@ export default class VideoDetails extends Component {
                 artistName={data.artistName}
                 collectionCensoredName={data.collectionCensoredName}
                 primaryGenreName={data.primaryGenreName}
+                country={data.country}
                 releaseDate={data.releaseDate}
                 trackCensoredName={data.trackCensoredName}
                 trackTimeMillis={data.trackTimeMillis}
