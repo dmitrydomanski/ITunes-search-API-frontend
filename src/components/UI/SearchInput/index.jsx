@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Button from '../Button';
 
 
 const Wrapper = styled.form`
-margin-top: 20px;
+margin: 20px 0 10px 0;
+display: flex;
+align-items: center;
+
 `;
 
 const TextField = styled.input`
@@ -13,6 +17,7 @@ font-size: 18px;
 border-radius: 5px;
 min-width: 350px;
 padding: 5px;
+margin-right: 10px;
 `;
 
 export default class SearchInput extends Component {
@@ -62,6 +67,7 @@ export default class SearchInput extends Component {
                     value={searchText}
                     placeholder="type in an artist name to search videos..."
                 />
+                <Button clicked={this.handleSubmit} title="Search" />
             </Wrapper>
         );
     }

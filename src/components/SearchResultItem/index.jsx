@@ -31,7 +31,13 @@ const artistName = {
 const searchResultItem = ({ artist, track, picture, clicked, trackId }) => {
     const handleClick = (art, idTrack) => () => clicked(art, idTrack);
     return (
-        <div style={wrapper} onClick={handleClick(artist, trackId)} onKeyDown={clicked} role="button" tabIndex="-1">
+        <div
+            style={wrapper}
+            // onClick={handleClick(artist, trackId)}
+            onKeyDown={clicked}
+            role="button"
+            tabIndex="-1"
+        >
             <img
                 style={{
                     borderRadius: '5px',

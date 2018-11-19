@@ -9,6 +9,7 @@ padding: 10px;
 const VideoInfo = styled.div`
 padding: 10px;
 text-align: right;
+color: darkgray;
 `;
 
 const CardWrapper = styled.div`
@@ -25,6 +26,7 @@ color: darkblue;
 const TrackName = styled.div`
 margin-bottom: 5px;
 font-size: 1.5em;
+color: black;
 `;
 
 const videoCard = ({
@@ -38,7 +40,7 @@ const videoCard = ({
 
     const minutes = Math.floor(trackTimeMillis / 60000);
     const seconds = (trackTimeMillis - minutes * 60000) / 1000;
-    const duration = `${minutes} : ${Math.ceil(seconds)}`;
+    const duration = `${minutes}:${Math.ceil(seconds)}`;
 
     return (
         <CardWrapper>

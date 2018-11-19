@@ -99,8 +99,8 @@ export default class ResultsLists extends Component {
                         : null}
                     <Button
                         clicked={this.getPopularRequests}
-                    >Get 10 most popular requests
-                    </Button>
+                        title="Get 10 most popular requests"
+                    />
                 </Header>
                 <Section>
                     {dataSearched && results.length === 0
@@ -108,10 +108,6 @@ export default class ResultsLists extends Component {
                         : results.map((item, index) => (
                             <Link
                                 to={`term=${item.artistName}&trackId=${item.trackId}`}
-                                // to={{
-                                //     pathname: '/',
-                                //     search: `term=${item.artistName}&trackId=${item.trackId}`,
-                                // }}
                                 key={parseInt(index.toString(), 10)}
                             >
                                 <SearchResultItem
